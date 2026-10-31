@@ -1,0 +1,96 @@
+[
+  {
+    "file": "Lucide-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/lucide-icons/lucide/a630cec77eac6568b989e87e4947a8bfe45caacd/LICENSE",
+    "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "components": [
+      "icons:lucide-feather"
+    ]
+  },
+  {
+    "file": "alloc-stdlib-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/dropbox/rust-alloc-no-stdlib/6032b6a9b20e03737135c55a0270ccffcc1438ef/LICENSE",
+    "sha256": "c0c56f26d9c051cac4d200c34c84e7ae9aaa853e01a982a1df08b09931e518ae",
+    "components": [
+      "cargo:alloc-stdlib@0.2.2"
+    ]
+  },
+  {
+    "file": "tauri-plugin-LICENSE-MIT.txt",
+    "url": "https://raw.githubusercontent.com/tauri-apps/tauri/499df79be65ef8c0670abc0207cd9e37b55d8491/LICENSE_MIT",
+    "sha256": "9dd42ea92cff2ede5cd477cbfcce051b2d0115c0ac7f368ee88cb545055dff1d",
+    "components": [
+      "cargo:tauri-plugin@2.6.2"
+    ]
+  },
+  {
+    "file": "tauri-plugin-LICENSE-APACHE.txt",
+    "url": "https://raw.githubusercontent.com/tauri-apps/tauri/499df79be65ef8c0670abc0207cd9e37b55d8491/LICENSE_APACHE-2.0",
+    "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+    "components": [
+      "cargo:tauri-plugin@2.6.2"
+    ]
+  },
+  {
+    "file": "UNIC-COPYRIGHT.txt",
+    "url": "https://raw.githubusercontent.com/open-i18n/rust-unic/5878605364af97a3358368a6eaef02104af2e016/COPYRIGHT.md",
+    "sha256": "f5c342c49f3ac804f3e8e7bb62a8040a44c50d47bb36902b1abd13f66a1adf8b",
+    "components": [
+      "cargo:unic-char-property@0.9.0",
+      "cargo:unic-char-range@0.9.0",
+      "cargo:unic-common@0.9.0",
+      "cargo:unic-ucd-ident@0.9.0",
+      "cargo:unic-ucd-version@0.9.0"
+    ]
+  },
+  {
+    "file": "UNIC-LICENSE-MIT.txt",
+    "url": "https://raw.githubusercontent.com/open-i18n/rust-unic/5878605364af97a3358368a6eaef02104af2e016/LICENSE-MIT",
+    "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+    "components": [
+      "cargo:unic-char-property@0.9.0",
+      "cargo:unic-char-range@0.9.0",
+      "cargo:unic-common@0.9.0",
+      "cargo:unic-ucd-ident@0.9.0",
+      "cargo:unic-ucd-version@0.9.0"
+    ]
+  },
+  {
+    "file": "UNIC-LICENSE-APACHE.txt",
+    "url": "https://raw.githubusercontent.com/open-i18n/rust-unic/5878605364af97a3358368a6eaef02104af2e016/LICENSE-APACHE",
+    "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+    "components": [
+      "cargo:unic-char-property@0.9.0",
+      "cargo:unic-char-range@0.9.0",
+      "cargo:unic-common@0.9.0",
+      "cargo:unic-ucd-ident@0.9.0",
+      "cargo:unic-ucd-version@0.9.0"
+    ]
+  },
+  {
+    "file": "webview2-com-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/wravery/webview2-rs/b74dc5e2b394044bea5191052868ce7a106c202c/LICENSE",
+    "sha256": "0dcf41516e608bbcb6cdc5229feb7b86fe4a643b85e7df251133c93408fdac73",
+    "components": [
+      "cargo:webview2-com@0.38.2",
+      "cargo:webview2-com-sys@0.38.2"
+    ]
+  },
+  {
+    "file": "webview2-com-macros-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/wravery/webview2-rs/dffa41a8a46d3f5565eefbff2de57d38d399f158/LICENSE",
+    "sha256": "0dcf41516e608bbcb6cdc5229feb7b86fe4a643b85e7df251133c93408fdac73",
+    "components": [
+      "cargo:webview2-com-macros@0.8.1"
+    ]
+  },
+  {
+    "file": "MPL-2.0.txt",
+    "url": "https://crates.io/api/v1/crates/cssparser/0.36.0/download",
+    "archive_path": "cssparser-0.36.0/LICENSE",
+    "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85",
+    "components": [
+      "cargo:selectors@0.36.1"
+    ]
+  }
+]

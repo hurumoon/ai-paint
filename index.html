@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Paint</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --startup-bg: #14141a;
+        --startup-panel: #20202a;
+        --startup-panel-2: #292934;
+        --startup-border: #353542;
+        --startup-text: #eef0f6;
+        --startup-dim: #9b9bab;
+        --startup-accent: #7c8cff;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: var(--startup-bg);
+      }
+      .startup-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background:
+          linear-gradient(135deg, rgba(124, 140, 255, 0.16), transparent 34%),
+          linear-gradient(315deg, rgba(180, 138, 255, 0.12), transparent 30%),
+          var(--startup-bg);
+        color: var(--startup-text);
+        font-family: -apple-system, "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+      }
+      .startup-splash-panel {
+        width: min(360px, 100%);
+        display: grid;
+        gap: 16px;
+        padding: 28px;
+        border: 1px solid var(--startup-border);
+        border-radius: 8px;
+        background: var(--startup-panel);
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
+      }
+      .startup-splash-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .startup-splash-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+      }
+      .startup-splash-title {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+      .startup-splash-status {
+        min-height: 20px;
+        margin: 0;
+        color: var(--startup-dim);
+        font-size: 13px;
+      }
+      .startup-splash-meter {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 12px;
+      }
+      .startup-splash-track {
+        height: 8px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--startup-panel-2);
+      }
+      .startup-splash-fill {
+        height: 100%;
+        width: 8%;
+        border-radius: inherit;
+        background: var(--startup-accent);
+        transition: width 160ms ease;
+      }
+      .startup-splash-percent {
+        min-width: 38px;
+        color: var(--startup-text);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        text-align: right;
+      }
+    </style>
+    <script>
+      window.__AI_PAINT_STARTUP_SPLASH__ = {
+        label: "HTML を読み込み中...",
+        percent: 8,
+      };
+    </script>
+  </head>
+  <body>
+    <div id="startup-splash" class="startup-splash" role="status" aria-live="polite">
+      <div class="startup-splash-panel">
+        <div class="startup-splash-brand">
+          <img class="startup-splash-icon" src="/app-icon.png" alt="" />
+          <h1 class="startup-splash-title">AI Paint</h1>
+        </div>
+        <p class="startup-splash-status" data-startup-label>HTML を読み込み中...</p>
+        <div class="startup-splash-meter" aria-hidden="true">
+          <div class="startup-splash-track">
+            <div class="startup-splash-fill" data-startup-progress></div>
+          </div>
+          <div class="startup-splash-percent" data-startup-percent>8%</div>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script>
+      window.__AI_PAINT_SET_STARTUP_SPLASH__ = function (label, percent) {
+        var safePercent = Math.max(0, Math.min(100, Math.round(percent)));
+        window.__AI_PAINT_STARTUP_SPLASH__ = { label: label, percent: safePercent };
+        var splash = document.getElementById("startup-splash");
+        if (!splash) return;
+        var labelEl = splash.querySelector("[data-startup-label]");
+        var progressEl = splash.querySelector("[data-startup-progress]");
+        var percentEl = splash.querySelector("[data-startup-percent]");
+        if (labelEl) labelEl.textContent = label;
+        if (progressEl) progressEl.style.width = safePercent + "%";
+        if (percentEl) percentEl.textContent = safePercent + "%";
+      };
+      window.__AI_PAINT_SET_STARTUP_SPLASH__("アプリ本体を読み込み中...", 18);
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

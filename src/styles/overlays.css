@@ -1,0 +1,226 @@
+/* ===== ドラッグアンドドロップ オーバーレイ ===== */
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 22, 35, 0.55);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  animation: drop-overlay-in 120ms ease-out;
+}
+.drop-overlay-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 48px;
+  border: 2px dashed var(--accent);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+  min-width: 320px;
+}
+.drop-overlay-box svg {
+  width: 48px;
+  height: 48px;
+  color: var(--accent);
+}
+.drop-overlay-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+.drop-overlay-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+@keyframes drop-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 起動スプラッシュ */
+.startup-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%),
+    linear-gradient(315deg, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 30%),
+    var(--bg);
+  color: var(--text);
+  animation: drop-overlay-in 120ms ease-out;
+}
+.startup-splash-panel {
+  width: min(360px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow-2);
+}
+.startup-splash-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.startup-splash-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+}
+.startup-splash-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.startup-splash-status {
+  min-height: 20px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.startup-splash-meter,
+.loading-overlay-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+.startup-splash-track,
+.loading-overlay-progress-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--panel-2);
+}
+.startup-splash-fill,
+.loading-overlay-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 160ms ease;
+}
+.startup-splash-percent,
+.loading-overlay-progress-percent {
+  min-width: 38px;
+  color: var(--text);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* ファイル読み込み中ダイアログ */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 22, 35, 0.55);
+  backdrop-filter: blur(2px);
+  animation: drop-overlay-in 120ms ease-out;
+}
+.loading-overlay-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 40px;
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+  min-width: 280px;
+}
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: loading-spin 0.9s linear infinite;
+}
+.loading-overlay-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+.loading-overlay-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  max-width: 320px;
+  text-align: center;
+  word-break: break-all;
+}
+.loading-overlay-progress {
+  width: 100%;
+  margin-top: 2px;
+}
+@keyframes loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* レイヤー状態インジケータ */
+.clip-indicator,
+.transparent-lock-indicator {
+  display: inline-flex;
+  vertical-align: -1px;
+  margin-right: 3px;
+  color: var(--accent);
+}
+
+.transparent-lock-indicator {
+  color: var(--warning);
+}
+
+/* ===== タブ 0 個時の空状態プレースホルダー ===== */
+.empty-canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--canvas-bg);
+  pointer-events: auto;
+}
+.empty-canvas-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 36px 48px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-2);
+  min-width: 320px;
+}
+.empty-canvas-box svg {
+  width: 56px;
+  height: 56px;
+  color: var(--accent);
+}
+.empty-canvas-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.empty-canvas-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-align: center;
+}
+.empty-canvas-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}

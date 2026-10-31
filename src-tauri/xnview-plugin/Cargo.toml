@@ -1,0 +1,17 @@
+[package]
+name = "aipaint-xnview-plugin"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+png = "0.17"
+windows-sys = { version = "0.61.2", features = ["Win32_Globalization"] }
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+zip = { version = "2", default-features = false, features = ["deflate"] }

@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run end-to-end tests
+        id: e2e
+        run: npm run test:e2e
+
+      - name: Upload Playwright failure traces
+        if: ${{ failure() && steps.e2e.outcome == 'failure' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results-${{ github.run_id }}
+          path: test-results/
+          if-no-files-found: warn
+          retention-days: 7
+
+  rust:
+    name: Rust check
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Rust toolchain
+        run: rustup show
+
+      - name: Check Tauri backend
+        working-directory: src-tauri
+        run: cargo check --locked
+
+      - name: Run Rust tests
+        working-directory: src-tauri
+        run: cargo test --locked
+
+      - name: Run thumbnail provider tests
+        run: cargo test --locked --manifest-path src-tauri/thumbnail-provider/Cargo.toml
+
+      - name: Run XnView plugin tests
+        run: cargo test --locked --manifest-path src-tauri/xnview-plugin/Cargo.toml
+
+  windows-bundle:
+    name: Windows build and smoke test
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push' &&
+        (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')))
+    runs-on: windows-latest
+    timeout-minutes: 45
+    needs:
+      - frontend
+      - rust
+    outputs:
+      installer-upload-outcome: ${{ steps.upload-installers.outcome }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Windows app and installers
+        run: npm run tauri -- build
+
+      - name: Smoke test packaged Windows app
+        run: .\scripts\test-windows-app-smoke.ps1
+
+      - name: Upload Windows installers
+        id: upload-installers
+        # 同じrunner上の検証済み成果物を送り、配布の成否は専用jobで判定する。
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-paint-windows-installers
+          path: |
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error
+
+  windows-artifacts:
+    name: Windows installer distribution
+    needs: windows-bundle
+    if: ${{ !cancelled() && needs.windows-bundle.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check installer upload result
+        env:
+          UPLOAD_OUTCOME: ${{ needs.windows-bundle.outputs.installer-upload-outcome }}
+        run: |
+          if [ "$UPLOAD_OUTCOME" != "success" ]; then
+            echo "::error::Windowsアプリの検証は成功しましたが、installerのアップロードは成功していません。Windows build and smoke test の Upload Windows installers を確認してください。"
+            echo "Windowsアプリの検証: 成功 / installer配布: 失敗（${UPLOAD_OUTCOME:-結果なし}）" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo "Windowsアプリの検証: 成功 / installer配布: 成功" >> "$GITHUB_STEP_SUMMARY"

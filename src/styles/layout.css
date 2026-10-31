@@ -1,0 +1,73 @@
+/* ===== アプリレイアウト =====
+ * 列順: tools(56) | toolopt(0|220) | left(0|320) | canvas(1fr) | right(0|320)
+ * toolopt は ツールオプション開閉、left/right は配置設定でセクションがある時のみ幅を持つ。
+ */
+.app {
+  display: grid;
+  grid-template-columns: 56px 0 0 1fr 0;
+  grid-template-rows: 36px 30px 1fr 24px;
+  grid-template-areas:
+    "menu menu menu menu menu"
+    "tabs tabs tabs tabs tabs"
+    "tools toolopt left canvas right"
+    "status status status status status";
+  height: 100vh;
+  background: var(--bg);
+}
+.app.has-tool-options { grid-template-columns: 56px 220px 0 1fr 0; }
+.app.has-left-panel { grid-template-columns: 56px 0 320px 1fr 0; }
+.app.has-right-panel { grid-template-columns: 56px 0 0 1fr 320px; }
+.app.has-tool-options.has-left-panel { grid-template-columns: 56px 220px 320px 1fr 0; }
+.app.has-tool-options.has-right-panel { grid-template-columns: 56px 220px 0 1fr 320px; }
+.app.has-left-panel.has-right-panel { grid-template-columns: 56px 0 320px 1fr 320px; }
+.app.has-tool-options.has-left-panel.has-right-panel { grid-template-columns: 56px 220px 320px 1fr 320px; }
+
+.app.layout-flipped {
+  grid-template-columns: 0 1fr 0 0 56px;
+  grid-template-areas:
+    "menu menu menu menu menu"
+    "tabs tabs tabs tabs tabs"
+    "right canvas left toolopt tools"
+    "status status status status status";
+}
+.app.layout-flipped.has-tool-options { grid-template-columns: 0 1fr 0 220px 56px; }
+.app.layout-flipped.has-left-panel { grid-template-columns: 0 1fr 320px 0 56px; }
+.app.layout-flipped.has-right-panel { grid-template-columns: 320px 1fr 0 0 56px; }
+.app.layout-flipped.has-tool-options.has-left-panel { grid-template-columns: 0 1fr 320px 220px 56px; }
+.app.layout-flipped.has-tool-options.has-right-panel { grid-template-columns: 320px 1fr 0 220px 56px; }
+.app.layout-flipped.has-left-panel.has-right-panel { grid-template-columns: 320px 1fr 320px 0 56px; }
+.app.layout-flipped.has-tool-options.has-left-panel.has-right-panel { grid-template-columns: 320px 1fr 320px 220px 56px; }
+
+.app.layout-flipped .toolbar {
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+.app.layout-flipped .tool-options-panel {
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+.app.layout-flipped .right-panel {
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+.app.layout-flipped .left-panel {
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+
+.menubar {
+  grid-area: menu;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 4px;
+  -webkit-app-region: drag;
+}
+.menubar > * { -webkit-app-region: no-drag; }
+.menubar .brand {
+  display: none;
+}
+.menubar .spacer { flex: 1; }
+

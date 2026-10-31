@@ -1,0 +1,17 @@
+node_modules
+dist
+src-tauri/target
+src-tauri/thumbnail-provider/target
+src-tauri/xnview-plugin/target
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.claude/settings.local.json
+build-exe.bat
+ui-snapshots/
+ui-snapshots-extra/
+test-results/
+playwright-report/
+megumi.psd

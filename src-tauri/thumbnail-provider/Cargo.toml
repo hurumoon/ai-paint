@@ -1,0 +1,27 @@
+[package]
+name = "aipaint-thumbnail-provider"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+png = "0.17"
+windows = { version = "0.61.3", features = [
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_System_Com",
+  "Win32_System_Ole",
+  "Win32_System_SystemServices",
+  "Win32_UI_Shell",
+  "Win32_UI_Shell_PropertiesSystem",
+  "Win32_UI_WindowsAndMessaging",
+] }
+windows-core = "0.61.2"
+zip = { version = "2", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+zip = { version = "2", default-features = false, features = ["deflate"] }

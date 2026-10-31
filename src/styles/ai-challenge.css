@@ -1,0 +1,236 @@
+/* ===== AI Challenge Mode ===== */
+.ai-challenge-mode {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 45;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  pointer-events: none;
+}
+.ai-challenge-mode button {
+  pointer-events: auto;
+}
+.ai-challenge-launch {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-dim);
+  box-shadow: var(--shadow-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.ai-challenge-launch:hover {
+  background: var(--panel-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.ai-challenge-mode.open .ai-challenge-launch {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+.ai-challenge-panel {
+  pointer-events: auto;
+  width: min(400px, calc(100vw - 64px));
+  margin-top: 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-2);
+  color: var(--text);
+  animation: aiChallengeSlide 180ms ease-out;
+}
+.ai-challenge-part {
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--text);
+}
+.ai-challenge-task {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+}
+.ai-challenge-kicker {
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ai-challenge-card {
+  width: 100%;
+  min-height: 30px;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+}
+.ai-challenge-card span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ai-challenge-card:hover:not(:disabled) {
+  background: var(--panel-3);
+  border-color: var(--border);
+}
+.ai-challenge-card:disabled {
+  cursor: default;
+}
+.ai-challenge-card svg {
+  color: var(--text-dim);
+}
+.ai-challenge-control-parts {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ai-challenge-meta-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  gap: 6px;
+  align-items: center;
+}
+.ai-challenge-strictness {
+  min-width: 0;
+  min-height: 34px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 6px;
+  padding: 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-2);
+}
+.ai-challenge-strictness span {
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ai-challenge-strictness .select {
+  min-width: 0;
+  height: 26px;
+  font-size: 11px;
+}
+.ai-challenge-records-button {
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+.ai-challenge-records-button:hover {
+  background: var(--panel-3);
+  border-color: var(--border-strong);
+}
+.ai-challenge-mode-toggle,
+.ai-challenge-time {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ai-challenge-mode-toggle {
+  width: 36px;
+  height: 36px;
+  color: var(--text-dim);
+}
+.ai-challenge-time {
+  flex: 1 1 auto;
+  min-width: 112px;
+  gap: 6px;
+  padding: 0 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.ai-challenge-time span {
+  min-width: 54px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+}
+.ai-challenge-mode-toggle:hover:not(:disabled),
+.ai-challenge-time:hover:not(:disabled) {
+  background: var(--panel-3);
+  color: var(--text);
+}
+.ai-challenge-run,
+.ai-challenge-end {
+  min-width: 0;
+  min-height: 36px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+}
+.ai-challenge-run {
+  min-width: 68px;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+.ai-challenge-end {
+  min-width: 52px;
+  background: var(--panel-2);
+  color: var(--danger);
+}
+.ai-challenge-run:hover:not(:disabled),
+.ai-challenge-end:hover:not(:disabled) {
+  background: var(--panel-3);
+  border-color: var(--border-strong);
+}
+.ai-challenge-run:hover:not(:disabled) {
+  filter: brightness(1.08);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.ai-challenge-panel button:disabled,
+.ai-challenge-part:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@keyframes aiChallengeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

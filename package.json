@@ -1,0 +1,51 @@
+{
+  "name": "ai-paint",
+  "private": true,
+  "version": "1.0.1",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --max-warnings=0",
+    "licenses:generate": "node scripts/generate-third-party-notices.mjs",
+    "check:public": "node scripts/check-public-release.mjs",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "thumbnail:build": "cargo build --release --manifest-path src-tauri/thumbnail-provider/Cargo.toml",
+    "thumbnail:register": "powershell -ExecutionPolicy Bypass -File scripts/register-aipaint-thumbnail.ps1",
+    "thumbnail:unregister": "powershell -ExecutionPolicy Bypass -File scripts/unregister-aipaint-thumbnail.ps1",
+    "xnview-plugin:build": "cargo build --release --manifest-path src-tauri/xnview-plugin/Cargo.toml",
+    "xnview-plugin:install": "powershell -ExecutionPolicy Bypass -File scripts/install-xnview-aipaint-plugin.ps1",
+    "xnview-plugin:uninstall": "powershell -ExecutionPolicy Bypass -File scripts/uninstall-xnview-aipaint-plugin.ps1",
+    "capture:ui:extra": "node scripts/capture-ui-extra.mjs",
+    "test:unit": "vitest run",
+    "test:e2e": "node scripts/run-playwright.mjs",
+    "test": "npm run test:unit && npm run test:e2e"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-dialog": "^2.7.1",
+    "ag-psd": "^30.1.1",
+    "fflate": "^0.8.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.0",
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^6.0.3",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.5.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.7.0",
+    "playwright": "^1.60.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0",
+    "vitest": "^4.1.9"
+  }
+}

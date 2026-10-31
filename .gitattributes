@@ -1,0 +1,26 @@
+* text=auto eol=lf
+
+*.aipaint binary
+*.bmp binary
+*.gif binary
+*.icns binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.png binary
+*.psd binary
+*.webp binary
+*.zip binary
+*.crate binary
+
+*.dll binary
+*.exe binary
+*.msi binary
+*.otf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+
+# Preserve upstream license text, including its original trailing spaces.
+THIRD_PARTY_NOTICES.txt -whitespace
+licenses/upstream/*.txt -whitespace

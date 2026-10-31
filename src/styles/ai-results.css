@@ -1,0 +1,105 @@
+/* ===== AI Results ===== */
+.ai-challenge-result-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.54);
+  backdrop-filter: blur(2px);
+  pointer-events: auto;
+}
+.ai-challenge-result {
+  width: min(420px, 100%);
+  max-height: min(620px, calc(100vh - 40px));
+  overflow: auto;
+  padding: 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-2);
+}
+.ai-challenge-result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.ai-challenge-result-head button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+}
+.ai-challenge-result-prompt {
+  margin-top: 10px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ai-challenge-result-meta {
+  margin-top: 4px;
+  color: var(--text-faint);
+  font-size: 11px;
+}
+.ai-challenge-scoring {
+  margin-top: 14px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-2);
+  font-size: 12px;
+}
+.ai-challenge-score {
+  margin-top: 12px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+.ai-challenge-score strong {
+  font-size: 44px;
+  line-height: 1;
+}
+.ai-challenge-score span {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.ai-challenge-subscores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.ai-challenge-subscores span {
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text-dim);
+  font-size: 11px;
+}
+.ai-challenge-advice {
+  margin-top: 12px;
+  padding: 10px;
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
